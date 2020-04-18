@@ -5,7 +5,9 @@ import "./App.css";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 
 function App() {
-  const [fileContent, setFileContent] = useState("");
+  const [fileContent, setFileContent] = useState('');
+  // const [fileContent, setFileContent] = useState([]); //multi pdf laczenie
+
   const [date, setDate] = useState(new Date());
   const [number, setNumber] = useState("P.1425.2020.");
   const [scale, setScale] = useState(0.7);
@@ -37,13 +39,22 @@ function App() {
     const content = fileReader.result;
     console.log(content);
     setFileContent(content);
+    // setFileContent([...fileContent, content]);
+
   };
 
   const handleChange = (content) => {
-    fileReader = new FileReader();
-    fileReader.onloadend = handleFileRead;
-    fileReader.readAsArrayBuffer(content);
-    console.log(fileReader, fileReader.result, fileContent);
+console.log('absQWQWQW', content)
+fileReader = new FileReader();
+fileReader.onloadend = handleFileRead;
+fileReader.readAsArrayBuffer(content);
+console.log(fileReader, fileReader.result, fileContent);
+// Array.from(content).forEach( file => {
+//       fileReader = new FileReader();
+//       fileReader.onloadend = handleFileRead;
+//        fileReader.readAsArrayBuffer(file);
+//       console.log(fileReader, fileReader.result, fileContent);
+//     })
   };
 
   const prepareRamka = async () => {
@@ -109,7 +120,7 @@ function App() {
     const embeddedPageRamkaDims = embeddedPageRamka.scale(scale);
     const embeddedPageContentDims = embeddedPageContent.scale(1);
 
-    const page = pdfDoc.addPage();
+    const page = pdfDoc.addPage([embeddedPageContentDims.width,embeddedPageContentDims.height]);
     page.drawPage(embeddedPageRamka, {
       ...embeddedPageRamkaDims,
       x: page.getWidth() - embeddedPageRamkaDims.width - x,
@@ -118,8 +129,8 @@ function App() {
 
     page.drawPage(embeddedPageContent, {
       ...embeddedPageContentDims,
-      x: page.getWidth() / 2 - embeddedPageContentDims.width / 2,
-      y: page.getHeight() / 2 - embeddedPageContentDims.height / 2 - 50,
+      x: 0,
+      y:0
     });
 
     const pdfBytes = await pdfDoc.save();
@@ -134,7 +145,8 @@ function App() {
     let newDate = new Date(value);
     setDate(newDate);
   };
-  console.log("asdasdadsd", moment(date).format("DD.MM.YYYY"));
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -154,6 +166,7 @@ function App() {
                 type="file"
                 onChange={(event) => handleChange(event.target.files[0])}
                 accept=".pdf"
+                multiple={true}
               ></input>
             </div>
 
