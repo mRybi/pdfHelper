@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/pdfHelper/static/css/main.ece232ea.chunk.css",
+    "main.js": "/pdfHelper/static/js/main.3ab0dd49.chunk.js",
+    "main.js.map": "/pdfHelper/static/js/main.3ab0dd49.chunk.js.map",
+    "runtime-main.js": "/pdfHelper/static/js/runtime-main.b2cdfa90.js",
+    "runtime-main.js.map": "/pdfHelper/static/js/runtime-main.b2cdfa90.js.map",
+    "static/js/2.bdf9878b.chunk.js": "/pdfHelper/static/js/2.bdf9878b.chunk.js",
+    "static/js/2.bdf9878b.chunk.js.map": "/pdfHelper/static/js/2.bdf9878b.chunk.js.map",
+    "index.html": "/pdfHelper/index.html",
+    "precache-manifest.f6a089e89a017ed2e888216d378f7931.js": "/pdfHelper/precache-manifest.f6a089e89a017ed2e888216d378f7931.js",
+    "service-worker.js": "/pdfHelper/service-worker.js",
+    "static/css/main.ece232ea.chunk.css.map": "/pdfHelper/static/css/main.ece232ea.chunk.css.map",
+    "static/js/2.bdf9878b.chunk.js.LICENSE.txt": "/pdfHelper/static/js/2.bdf9878b.chunk.js.LICENSE.txt",
+    "static/media/ramka.png": "/pdfHelper/static/media/ramka.3144896e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b2cdfa90.js",
+    "static/js/2.bdf9878b.chunk.js",
+    "static/css/main.ece232ea.chunk.css",
+    "static/js/main.3ab0dd49.chunk.js"
+  ]
+}
