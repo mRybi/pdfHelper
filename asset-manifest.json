@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/pdfHelper/static/css/main.ece232ea.chunk.css",
-    "main.js": "/pdfHelper/static/js/main.c4392684.chunk.js",
-    "main.js.map": "/pdfHelper/static/js/main.c4392684.chunk.js.map",
+    "main.js": "/pdfHelper/static/js/main.eb048de1.chunk.js",
+    "main.js.map": "/pdfHelper/static/js/main.eb048de1.chunk.js.map",
     "runtime-main.js": "/pdfHelper/static/js/runtime-main.b2cdfa90.js",
     "runtime-main.js.map": "/pdfHelper/static/js/runtime-main.b2cdfa90.js.map",
-    "static/js/2.3644488b.chunk.js": "/pdfHelper/static/js/2.3644488b.chunk.js",
-    "static/js/2.3644488b.chunk.js.map": "/pdfHelper/static/js/2.3644488b.chunk.js.map",
+    "static/js/2.179d240c.chunk.js": "/pdfHelper/static/js/2.179d240c.chunk.js",
+    "static/js/2.179d240c.chunk.js.map": "/pdfHelper/static/js/2.179d240c.chunk.js.map",
     "index.html": "/pdfHelper/index.html",
-    "precache-manifest.0f43cf8931d31d47305536cf6920a5cc.js": "/pdfHelper/precache-manifest.0f43cf8931d31d47305536cf6920a5cc.js",
+    "precache-manifest.26203b51eb1a9c16c447fc00ef15a6bc.js": "/pdfHelper/precache-manifest.26203b51eb1a9c16c447fc00ef15a6bc.js",
     "service-worker.js": "/pdfHelper/service-worker.js",
     "static/css/main.ece232ea.chunk.css.map": "/pdfHelper/static/css/main.ece232ea.chunk.css.map",
-    "static/js/2.3644488b.chunk.js.LICENSE.txt": "/pdfHelper/static/js/2.3644488b.chunk.js.LICENSE.txt",
+    "static/js/2.179d240c.chunk.js.LICENSE.txt": "/pdfHelper/static/js/2.179d240c.chunk.js.LICENSE.txt",
     "static/media/ramka.png": "/pdfHelper/static/media/ramka.3144896e.png"
   },
   "entrypoints": [
     "static/js/runtime-main.b2cdfa90.js",
-    "static/js/2.3644488b.chunk.js",
+    "static/js/2.179d240c.chunk.js",
     "static/css/main.ece232ea.chunk.css",
-    "static/js/main.c4392684.chunk.js"
+    "static/js/main.eb048de1.chunk.js"
   ]
 }
