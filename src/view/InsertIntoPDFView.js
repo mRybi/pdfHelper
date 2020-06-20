@@ -13,7 +13,6 @@ function InsertIntoPDFView() {
   const [number, setNumber] = useState("P.1425.2020.");
     const [scale, setScale] = useState(0.7);
     const [showFile, setShowFile] = useState(false);
-    const [ramkaHorizontal, setRamkaHorizontal] = useState(false);
 
 
   const [x, setX] = useState(20);
@@ -24,10 +23,17 @@ function InsertIntoPDFView() {
   const [pdfBytes, setpdfBytes] = useState(null);
 
   const [ramkaBytes, setRamkaBytes] = useState(null);
+  const [deegrees, setDeegrees] = useState(0);
+
 
   useEffect(() => {
     prepareRamka();
-  }, [number, date, ramkaHorizontal]);
+    fileContent && modifyPdf();
+  }, [number, date, deegrees]);
+
+  useEffect(() => {
+    fileContent && modifyPdf();
+  }, [x, y, scale]);
 
   let fileReader;
 
@@ -82,11 +88,7 @@ function InsertIntoPDFView() {
       color: rgb(0.95, 0.1, 0.1),
     });
 
-    if(ramkaHorizontal) {
-      firstPage.setRotation(degrees(90))
-    } else {
-      firstPage.setRotation(degrees(0))
-    }
+    firstPage.setRotation(degrees(deegrees))
 
 
     let ramkaBytes = await imgpdf.save();
@@ -117,7 +119,7 @@ function InsertIntoPDFView() {
       ...embeddedPageRamkaDims,
       x: page.getWidth() - embeddedPageRamkaDims.width - x,
       y: page.getHeight() - embeddedPageRamkaDims.height - y,
-      rotate: ramkaHorizontal ? degrees(90) : degrees(0)
+      rotate: degrees(-deegrees)
     });
 
     page.drawPage(embeddedPageContent, {
@@ -185,7 +187,7 @@ function InsertIntoPDFView() {
           </div>
           <div className="column">
           <div>
-              <button onClick={() => setRamkaHorizontal(!ramkaHorizontal)}>Rotacja</button>
+              <button onClick={() => deegrees < 360 ? setDeegrees(deegrees + 90) : setDeegrees(90)}>Rotacja</button>
             </div>
             <div>
               <label>numer roboty: </label>
