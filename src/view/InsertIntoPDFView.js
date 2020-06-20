@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ramka from "../ramka.png";
 import * as moment from "moment";
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import { PDFDocument, rgb, StandardFonts, degrees } from "pdf-lib";
 
 import { FileDisplay } from "../components/FileDisplay/FileDisplay";
 
@@ -13,6 +13,7 @@ function InsertIntoPDFView() {
   const [number, setNumber] = useState("P.1425.2020.");
     const [scale, setScale] = useState(0.7);
     const [showFile, setShowFile] = useState(false);
+    const [ramkaHorizontal, setRamkaHorizontal] = useState(false);
 
 
   const [x, setX] = useState(20);
@@ -26,7 +27,7 @@ function InsertIntoPDFView() {
 
   useEffect(() => {
     prepareRamka();
-  }, [number, date]);
+  }, [number, date, ramkaHorizontal]);
 
   let fileReader;
 
@@ -81,6 +82,13 @@ function InsertIntoPDFView() {
       color: rgb(0.95, 0.1, 0.1),
     });
 
+    if(ramkaHorizontal) {
+      firstPage.setRotation(degrees(90))
+    } else {
+      firstPage.setRotation(degrees(0))
+    }
+
+
     let ramkaBytes = await imgpdf.save();
     setRamkaBytes(ramkaBytes);
     return imgpdf;
@@ -97,7 +105,7 @@ function InsertIntoPDFView() {
 
     let embeddedPageRamka = await pdfDoc.embedPage(ramkapage);
     let embeddedPageContent = await pdfDoc.embedPage(contentPage);
-
+    
     const embeddedPageRamkaDims = embeddedPageRamka.scale(scale);
     const embeddedPageContentDims = embeddedPageContent.scale(1);
 
@@ -109,6 +117,7 @@ function InsertIntoPDFView() {
       ...embeddedPageRamkaDims,
       x: page.getWidth() - embeddedPageRamkaDims.width - x,
       y: page.getHeight() - embeddedPageRamkaDims.height - y,
+      rotate: ramkaHorizontal ? degrees(90) : degrees(0)
     });
 
     page.drawPage(embeddedPageContent, {
@@ -175,6 +184,9 @@ function InsertIntoPDFView() {
             </div>
           </div>
           <div className="column">
+          <div>
+              <button onClick={() => setRamkaHorizontal(!ramkaHorizontal)}>Rotacja</button>
+            </div>
             <div>
               <label>numer roboty: </label>
               <input
