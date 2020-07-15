@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
 import ramka from "../ramka.png";
+import ramkaTarcza from "../tarcza4.png";
+
 import * as moment from "moment";
 import { PDFDocument, rgb, StandardFonts, degrees } from "pdf-lib";
 
 import { FileDisplay } from "../components/FileDisplay/FileDisplay";
 
 function InsertIntoPDFView() {
+  const [isTarczaView, setTarczView] = useState(true);
   const [fileContent, setFileContent] = useState("");
-  // const [fileContent, setFileContent] = useState([]); //multi pdf laczenie
 
   const [date, setDate] = useState(new Date());
+  const [dateSporządzenia, setDateSporządzenia] = useState(new Date());
+
   const [number, setNumber] = useState("P.1425.2020.");
-    const [scale, setScale] = useState(0.7);
+  const [numberTarcza, setNumberTarcza] = useState("GKN-I.");
+
+    const [scale, setScale] = useState(0.5);
     const [showFile, setShowFile] = useState(false);
 
 
@@ -27,9 +33,10 @@ function InsertIntoPDFView() {
 
 
   useEffect(() => {
-    prepareRamka();
+    console.log('!!!!!ramka', isTarczaView);
+    isTarczaView ? prepareRamkaTarcza4() : prepareRamka();
     fileContent && modifyPdf();
-  }, [number, date, deegrees]);
+  }, [number,numberTarcza, date, dateSporządzenia, deegrees, isTarczaView]);
 
   useEffect(() => {
     fileContent && modifyPdf();
@@ -95,8 +102,81 @@ function InsertIntoPDFView() {
     setRamkaBytes(ramkaBytes);
     return imgpdf;
   };
+
+  const prepareRamkaTarcza4 = async () => {
+    const pngImageBytes = await fetch(ramkaTarcza).then((res) => res.arrayBuffer());
+
+    const imgpdf = await PDFDocument.create();
+    const pngImage = await imgpdf.embedPng(pngImageBytes);
+    imgpdf.addPage([pngImage.width, pngImage.height]);
+
+    const pngDims = pngImage.scale(1); // wielkosc ramki
+    const helveticaFont = await imgpdf.embedFont(StandardFonts.Helvetica);
+
+    const pages = imgpdf.getPages();
+    const firstPage = pages[0];
+
+    firstPage.drawImage(pngImage, {
+      x: 0,
+      y: 0,
+      width: pngDims.width,
+      height: pngDims.height,
+    });
+
+    // data
+    firstPage.drawText(date.toLocaleDateString(), {
+      x: 460,
+      y: 220,
+      size: 20,
+      font: helveticaFont,
+      color: rgb(0, 0, 0),
+    });
+
+    // data sporządzenia
+    firstPage.drawText(`z dn. ${dateSporządzenia.toLocaleDateString()}`, {
+      x: 430,
+      y: 70,
+      size: 20,
+      font: helveticaFont,
+      color: rgb(0, 0, 0),
+    });
+
+    firstPage.drawText(numberTarcza, {
+      x: 400,
+      y: 90,
+      size: 20,
+      font: helveticaFont,
+      color: rgb(0, 0, 0),
+    });
+
+    firstPage.drawText(numberTarcza, {
+      x: 400,
+      y: 300,
+      size: 20,
+      font: helveticaFont,
+      color: rgb(0, 0, 0),
+    });
+
+    //numerek
+    firstPage.drawText(number, {
+      x: 450,
+      y: 275,
+      size: 20,
+      font: helveticaFont,
+      color: rgb(0, 0, 0),
+    });
+
+
+    firstPage.setRotation(degrees(deegrees))
+
+
+    let ramkaBytes = await imgpdf.save();
+    setRamkaBytes(ramkaBytes);
+    return imgpdf;
+  };
+
   async function modifyPdf() {
-    let imgpdf = await prepareRamka();
+    let imgpdf = isTarczaView ? await prepareRamkaTarcza4() : await prepareRamka();
 
     const pdfDocContent = await PDFDocument.load(fileContent);
 
@@ -139,6 +219,17 @@ function InsertIntoPDFView() {
     setDate(newDate);
   };
 
+  const handleDateSporządzeniaChange = (value) => {
+    let newDate = new Date(value);
+    setDateSporządzenia(newDate);
+  };
+
+  const handleViewChange = () => {
+    isTarczaView ? prepareRamka() : prepareRamkaTarcza4();
+    setTarczView(!isTarczaView);
+
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -161,7 +252,7 @@ function InsertIntoPDFView() {
             </div>
 
             <div>
-              <label>skala czerownej ramki: </label>
+              <label>skala ramki: </label>
               <input
                 type="number"
                 defaultValue={scale}
@@ -190,6 +281,19 @@ function InsertIntoPDFView() {
               <button onClick={() => deegrees < 360 ? setDeegrees(deegrees + 90) : setDeegrees(90)}>Rotacja</button>
             </div>
             <div>
+              <button onClick={() => handleViewChange()}>Zmień ramkę</button>
+            </div>
+            {isTarczaView &&
+            <div>
+              <label>Id ewidencyjny materiału: </label>
+              <input
+                type="text"
+                defaultValue={numberTarcza}
+                onChange={(event) => setNumberTarcza(event.target.value)}
+              />
+            </div> }
+
+            <div>
               <label>numer roboty: </label>
               <input
                 type="text"
@@ -208,6 +312,17 @@ function InsertIntoPDFView() {
                 }}
               />
             </div>
+            {isTarczaView &&
+            <div>
+              <label>data sporządzenia: </label>
+              <input
+                type="date"
+                defaultValue={moment(dateSporządzenia).format("YYYY-MM-DD")}
+                onChange={(event) => {
+                  handleDateSporządzeniaChange(event.target.value.toString());
+                }}
+              />
+            </div>}
           </div>
         </div>
 
