@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import ramka from "../ramka.png";
 import ramkaTarcza from "../tarcza4.png";
+import ramkaTarczaZMiastem from "../tarczaMiastoWies.png";
+
 
 import * as moment from "moment";
 import { PDFDocument, rgb, StandardFonts, degrees } from "pdf-lib";
@@ -11,15 +13,16 @@ function InsertIntoPDFView() {
   const [isTarczaView, setTarczView] = useState(true);
   const [fileContent, setFileContent] = useState("");
 
+  const [organProwadzacy, setOrganProwadzacy] = useState(false);
+
   const [date, setDate] = useState(new Date());
   const [dateSporządzenia, setDateSporządzenia] = useState(new Date());
 
-  const [number, setNumber] = useState("P.1425.2020.");
-  const [numberTarcza, setNumberTarcza] = useState("GKN-I.");
+  const [number, setNumber] = useState("P.1463.2020."); // P.1425.2020.
+  const [numberTarcza, setNumberTarcza] = useState("Gd.III.6642.2."); // GKN-I.
 
-    const [scale, setScale] = useState(0.5);
-    const [showFile, setShowFile] = useState(false);
-
+  const [scale, setScale] = useState(0.5);
+  const [showFile, setShowFile] = useState(false);
 
   const [x, setX] = useState(20);
   const [y, setY] = useState(20);
@@ -32,11 +35,16 @@ function InsertIntoPDFView() {
   const [deegrees, setDeegrees] = useState(0);
 
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     console.log('!!!!!ramka', isTarczaView);
+    // if(organProwadzacy) {
+    //   setNumber(number.replace('1425', '1463'))
+    // } else {
+    //   setNumber(number.replace('1463', '1425'))
+    // }
     isTarczaView ? prepareRamkaTarcza4() : prepareRamka();
     fileContent && modifyPdf();
-  }, [number,numberTarcza, date, dateSporządzenia, deegrees, isTarczaView]);
+  }, [number,numberTarcza, date, dateSporządzenia, deegrees, isTarczaView, organProwadzacy]);
 
   useEffect(() => {
     fileContent && modifyPdf();
@@ -104,7 +112,7 @@ function InsertIntoPDFView() {
   };
 
   const prepareRamkaTarcza4 = async () => {
-    const pngImageBytes = await fetch(ramkaTarcza).then((res) => res.arrayBuffer());
+    const pngImageBytes = await fetch(ramkaTarczaZMiastem).then((res) => res.arrayBuffer());
 
     const imgpdf = await PDFDocument.create();
     const pngImage = await imgpdf.embedPng(pngImageBytes);
@@ -123,18 +131,27 @@ function InsertIntoPDFView() {
       height: pngDims.height,
     });
 
+    // data sporządzenia
+    firstPage.drawText(`${organProwadzacy ? 'STAROSTA RADOMSKI' : 'PREZYDENT MIASTA RADOMIA'}`, {
+      x: organProwadzacy ? 420 : 390,
+      y: 270,
+      size: 20,
+      font: helveticaFont,
+      color: rgb(0, 0, 0),
+    });
+
     // data
     firstPage.drawText(date.toLocaleDateString(), {
       x: 460,
-      y: 220,
+      y: 170,
       size: 20,
       font: helveticaFont,
       color: rgb(0, 0, 0),
     });
 
     // data sporządzenia
-    firstPage.drawText(`z dn. ${dateSporządzenia.toLocaleDateString()}`, {
-      x: 430,
+    firstPage.drawText(`Protokól kontroli z dn. ${dateSporządzenia.toLocaleDateString()}`, {
+      x: 400,
       y: 70,
       size: 20,
       font: helveticaFont,
@@ -143,15 +160,7 @@ function InsertIntoPDFView() {
 
     firstPage.drawText(numberTarcza, {
       x: 400,
-      y: 90,
-      size: 20,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
-    });
-
-    firstPage.drawText(numberTarcza, {
-      x: 400,
-      y: 300,
+      y: 225,
       size: 20,
       font: helveticaFont,
       color: rgb(0, 0, 0),
@@ -160,7 +169,7 @@ function InsertIntoPDFView() {
     //numerek
     firstPage.drawText(number, {
       x: 450,
-      y: 275,
+      y: 205,
       size: 20,
       font: helveticaFont,
       color: rgb(0, 0, 0),
@@ -230,6 +239,18 @@ function InsertIntoPDFView() {
 
   }
 
+  const handleOrganChange= (value) => {
+    if(value) {
+      setOrganProwadzacy(true);
+      setNumber('P.1425.2020');
+      setNumberTarcza('GKN-I.');
+    } else {
+      setOrganProwadzacy(false);
+      setNumber('P.1463.2020');
+      setNumberTarcza('Gd.III.6642.2.');
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -283,12 +304,25 @@ function InsertIntoPDFView() {
             <div>
               <button onClick={() => handleViewChange()}>Zmień ramkę</button>
             </div>
+            
+            <input type="radio" 
+            id="miasto" 
+            value={organProwadzacy} 
+            onChange={() => handleOrganChange(false)}
+            checked={!organProwadzacy}
+            />
+            <label for="miasto">Miasto</label>
+            <input type="radio" id="wies"  
+            checked={organProwadzacy}
+            value={organProwadzacy}  onChange={() => handleOrganChange(true)}/>
+            <label for="wies">Wieś</label>
+
             {isTarczaView &&
             <div>
               <label>Id ewidencyjny materiału: </label>
               <input
                 type="text"
-                defaultValue={numberTarcza}
+                value={numberTarcza}
                 onChange={(event) => setNumberTarcza(event.target.value)}
               />
             </div> }
@@ -297,7 +331,7 @@ function InsertIntoPDFView() {
               <label>numer roboty: </label>
               <input
                 type="text"
-                defaultValue={number}
+                value={number}
                 onChange={(event) => setNumber(event.target.value)}
               />
             </div>
