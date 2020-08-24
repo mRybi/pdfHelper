@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6df73d898aca08a5b171f9325c92785e",
+    "revision": "355e7f0c7e8e869f5c861bc4359038b1",
     "url": "/pdfHelper/index.html"
   },
   {
-    "revision": "f59cf61ffbd260894f99",
+    "revision": "68feee95b7f32acef4ba",
     "url": "/pdfHelper/static/css/main.ece232ea.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pdfHelper/static/js/2.f733305d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f59cf61ffbd260894f99",
-    "url": "/pdfHelper/static/js/main.2481a451.chunk.js"
+    "revision": "68feee95b7f32acef4ba",
+    "url": "/pdfHelper/static/js/main.96b9e9ff.chunk.js"
   },
   {
     "revision": "aadb253669a4aa9466d7",
@@ -32,7 +32,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pdfHelper/static/media/tarcza4.19855605.png"
   },
   {
-    "revision": "263eb1e7bea89950d8ede95f6c1c2226",
-    "url": "/pdfHelper/static/media/tarczaMiastoWies.263eb1e7.png"
+    "revision": "6dd3ecfc2a5c223110b40fb5d7afb94f",
+    "url": "/pdfHelper/static/media/tarczaMiastoWies2.6dd3ecfc.png"
   }
 ]);
