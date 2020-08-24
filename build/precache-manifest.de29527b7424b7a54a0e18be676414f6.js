@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "966ad9e2e10081c4c139a906c86d434a",
+    "revision": "6df73d898aca08a5b171f9325c92785e",
     "url": "/pdfHelper/index.html"
   },
   {
-    "revision": "9d1dbde3275a4bea53e2",
+    "revision": "f59cf61ffbd260894f99",
     "url": "/pdfHelper/static/css/main.ece232ea.chunk.css"
   },
   {
-    "revision": "f06fd8f9ef2d3379f444",
-    "url": "/pdfHelper/static/js/2.e2447735.chunk.js"
+    "revision": "03658ad6737b3985e66a",
+    "url": "/pdfHelper/static/js/2.f733305d.chunk.js"
   },
   {
     "revision": "216e537bacc64f9dbaabd26649a9ab95",
-    "url": "/pdfHelper/static/js/2.e2447735.chunk.js.LICENSE.txt"
+    "url": "/pdfHelper/static/js/2.f733305d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9d1dbde3275a4bea53e2",
-    "url": "/pdfHelper/static/js/main.8bd79a9e.chunk.js"
+    "revision": "f59cf61ffbd260894f99",
+    "url": "/pdfHelper/static/js/main.2481a451.chunk.js"
   },
   {
     "revision": "aadb253669a4aa9466d7",
@@ -30,5 +30,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "19855605beeeb9fc4ac4344ed636418f",
     "url": "/pdfHelper/static/media/tarcza4.19855605.png"
+  },
+  {
+    "revision": "263eb1e7bea89950d8ede95f6c1c2226",
+    "url": "/pdfHelper/static/media/tarczaMiastoWies.263eb1e7.png"
   }
 ]);

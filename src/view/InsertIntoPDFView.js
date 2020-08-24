@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import ramka from "../ramka.png";
 import ramkaTarcza from "../tarcza4.png";
-import ramkaTarczaZMiastem from "../tarczaMiastoWies.png";
+import ramkaTarczaZMiastem from "../tarczaMiastoWies2.png";
 
 
 import * as moment from "moment";
@@ -35,13 +35,7 @@ function InsertIntoPDFView() {
   const [deegrees, setDeegrees] = useState(0);
 
 
-  useLayoutEffect(() => {
-    console.log('!!!!!ramka', isTarczaView);
-    // if(organProwadzacy) {
-    //   setNumber(number.replace('1425', '1463'))
-    // } else {
-    //   setNumber(number.replace('1463', '1425'))
-    // }
+  useEffect(() => {
     isTarczaView ? prepareRamkaTarcza4() : prepareRamka();
     fileContent && modifyPdf();
   }, [number,numberTarcza, date, dateSporządzenia, deegrees, isTarczaView, organProwadzacy]);
@@ -133,44 +127,44 @@ function InsertIntoPDFView() {
 
     // data sporządzenia
     firstPage.drawText(`${organProwadzacy ? 'STAROSTA RADOMSKI' : 'PREZYDENT MIASTA RADOMIA'}`, {
-      x: organProwadzacy ? 420 : 390,
-      y: 270,
-      size: 20,
+      x: organProwadzacy ? 360 : 320,
+      y: 290,
+      size: 17,
       font: helveticaFont,
       color: rgb(0, 0, 0),
     });
 
     // data
     firstPage.drawText(date.toLocaleDateString(), {
-      x: 460,
-      y: 170,
-      size: 20,
+      x: 410,
+      y: 190,
+      size: 17,
       font: helveticaFont,
       color: rgb(0, 0, 0),
     });
 
     // data sporządzenia
     firstPage.drawText(`Protokól kontroli z dn. ${dateSporządzenia.toLocaleDateString()}`, {
-      x: 400,
-      y: 70,
-      size: 20,
+      x: 320,
+      y: 80,
+      size: 17,
       font: helveticaFont,
       color: rgb(0, 0, 0),
     });
 
     firstPage.drawText(numberTarcza, {
-      x: 400,
-      y: 225,
-      size: 20,
+      x: 370,
+      y: 250,
+      size: 17,
       font: helveticaFont,
       color: rgb(0, 0, 0),
     });
 
     //numerek
     firstPage.drawText(number, {
-      x: 450,
-      y: 205,
-      size: 20,
+      x: 370,
+      y: 225,
+      size: 17,
       font: helveticaFont,
       color: rgb(0, 0, 0),
     });
@@ -204,17 +198,18 @@ function InsertIntoPDFView() {
       embeddedPageContentDims.width,
       embeddedPageContentDims.height,
     ]);
-    page.drawPage(embeddedPageRamka, {
-      ...embeddedPageRamkaDims,
-      x: page.getWidth() - embeddedPageRamkaDims.width - x,
-      y: page.getHeight() - embeddedPageRamkaDims.height - y,
-      rotate: degrees(-deegrees)
-    });
 
     page.drawPage(embeddedPageContent, {
       ...embeddedPageContentDims,
       x: 0,
       y: 0,
+    });
+
+    page.drawPage(embeddedPageRamka, {
+      ...embeddedPageRamkaDims,
+      x: page.getWidth() - embeddedPageRamkaDims.width - x,
+      y: page.getHeight() - embeddedPageRamkaDims.height - y,
+      rotate: degrees(-deegrees)
     });
 
     const pdfBytes = await pdfDoc.save();
@@ -311,11 +306,11 @@ function InsertIntoPDFView() {
             onChange={() => handleOrganChange(false)}
             checked={!organProwadzacy}
             />
-            <label for="miasto">Miasto</label>
+            <label htmlFor="miasto">Miasto</label>
             <input type="radio" id="wies"  
             checked={organProwadzacy}
             value={organProwadzacy}  onChange={() => handleOrganChange(true)}/>
-            <label for="wies">Wieś</label>
+            <label htmlFor="wies">Wieś</label>
 
             {isTarczaView &&
             <div>
