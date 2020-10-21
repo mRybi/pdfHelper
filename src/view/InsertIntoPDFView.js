@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import ramka from "../ramka.png";
 import ramkaTarcza from "../tarcza4.png";
-import ramkaTarczaZMiastem from "../tarczaMiastoWies2.png";
+import ramkaTarczaZMiastem from "../s.png";
 
 
 import * as moment from "moment";
@@ -128,7 +128,7 @@ function InsertIntoPDFView() {
     // data sporządzenia
     firstPage.drawText(`${organProwadzacy ? 'STAROSTA RADOMSKI' : 'PREZYDENT MIASTA RADOMIA'}`, {
       x: organProwadzacy ? 360 : 320,
-      y: 290,
+      y: 320,
       size: 17,
       font: helveticaFont,
       color: rgb(0, 0, 0),
@@ -144,9 +144,16 @@ function InsertIntoPDFView() {
     });
 
     // data sporządzenia
-    firstPage.drawText(`Protokól kontroli z dn. ${dateSporządzenia.toLocaleDateString()}`, {
-      x: 320,
+    firstPage.drawText(numberTarcza, {
+      x: 370,
       y: 80,
+      size: 17,
+      font: helveticaFont,
+      color: rgb(0, 0, 0),
+    });
+    firstPage.drawText(`z dn. ${dateSporządzenia.toLocaleDateString()}`, {
+      x: 390,
+      y: 60,
       size: 17,
       font: helveticaFont,
       color: rgb(0, 0, 0),
@@ -154,7 +161,7 @@ function InsertIntoPDFView() {
 
     firstPage.drawText(numberTarcza, {
       x: 370,
-      y: 250,
+      y: 260,
       size: 17,
       font: helveticaFont,
       color: rgb(0, 0, 0),
@@ -163,7 +170,7 @@ function InsertIntoPDFView() {
     //numerek
     firstPage.drawText(number, {
       x: 370,
-      y: 225,
+      y: 240,
       size: 17,
       font: helveticaFont,
       color: rgb(0, 0, 0),
