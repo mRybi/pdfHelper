@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "861f570f76a5231d8c176aa4519e08e0",
+    "revision": "5fd36dce3dc0790a629d018475dce12c",
     "url": "/pdfHelper/index.html"
   },
   {
-    "revision": "64343e947ffffc40c5cf",
+    "revision": "6aaf16a322c4aba68371",
     "url": "/pdfHelper/static/css/main.ece232ea.chunk.css"
   },
   {
-    "revision": "70f368838e4776ef217e",
-    "url": "/pdfHelper/static/js/2.58eaec9a.chunk.js"
+    "revision": "03658ad6737b3985e66a",
+    "url": "/pdfHelper/static/js/2.f733305d.chunk.js"
   },
   {
     "revision": "216e537bacc64f9dbaabd26649a9ab95",
-    "url": "/pdfHelper/static/js/2.58eaec9a.chunk.js.LICENSE.txt"
+    "url": "/pdfHelper/static/js/2.f733305d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "64343e947ffffc40c5cf",
-    "url": "/pdfHelper/static/js/main.e72b038e.chunk.js"
+    "revision": "6aaf16a322c4aba68371",
+    "url": "/pdfHelper/static/js/main.91327117.chunk.js"
   },
   {
     "revision": "aadb253669a4aa9466d7",
@@ -28,8 +28,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pdfHelper/static/media/ramka.3144896e.png"
   },
   {
-    "revision": "351846d0906d30622385af7b5feeee67",
-    "url": "/pdfHelper/static/media/s.351846d0.png"
+    "revision": "c0b8c67d3d8cc1471317e98cee7b7961",
+    "url": "/pdfHelper/static/media/ramkaV5.c0b8c67d.png"
   },
   {
     "revision": "19855605beeeb9fc4ac4344ed636418f",
