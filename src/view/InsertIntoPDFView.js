@@ -15,11 +15,11 @@ function InsertIntoPDFView() {
 
   const [organProwadzacy, setOrganProwadzacy] = useState(false);
 
-  const [date, setDate] = useState(new Date());
+  // const [date, setDate] = useState(new Date());
   const [dateSporządzenia, setDateSporządzenia] = useState(new Date());
 
-  const [numberTarcza, setNumberTarcza] = useState("Gd.III.6642.2.1"); // GKN-I.
-  const [number, setNumber] = useState("Gd.III.6642.2.2"); // P.1425.2020.
+  const [numberTarcza, setNumberTarcza] = useState("Gd.III.6642.2."); // GKN-I.
+  const [number, setNumber] = useState("Gd.III.6642.2."); // P.1425.2020.
 
   const [scale, setScale] = useState(0.5);
   const [showFile, setShowFile] = useState(false);
@@ -36,9 +36,11 @@ function InsertIntoPDFView() {
 
 
   useEffect(() => {
-    isTarczaView ? prepareRamkaTarcza4() : prepareRamka();
+    // isTarczaView ? prepareRamkaTarcza4() : prepareRamka();
+    prepareRamkaTarcza4();
+
     fileContent && modifyPdf();
-  }, [number,numberTarcza, date, dateSporządzenia, deegrees, isTarczaView, organProwadzacy]);
+  }, [number,numberTarcza, dateSporządzenia, deegrees, isTarczaView, organProwadzacy]);
 
   useEffect(() => {
     fileContent && modifyPdf();
@@ -59,51 +61,51 @@ function InsertIntoPDFView() {
     console.log(fileReader, fileReader.result, fileContent);
   };
 
-  const prepareRamka = async () => {
-    const pngImageBytes = await fetch(ramka).then((res) => res.arrayBuffer());
+  // const prepareRamka = async () => {
+  //   const pngImageBytes = await fetch(ramka).then((res) => res.arrayBuffer());
 
-    const imgpdf = await PDFDocument.create();
-    const pngImage = await imgpdf.embedPng(pngImageBytes);
-    imgpdf.addPage([pngImage.width, pngImage.height]);
+  //   const imgpdf = await PDFDocument.create();
+  //   const pngImage = await imgpdf.embedPng(pngImageBytes);
+  //   imgpdf.addPage([pngImage.width, pngImage.height]);
 
-    const pngDims = pngImage.scale(1); // wielkosc ramki
-    const helveticaFont = await imgpdf.embedFont(StandardFonts.HelveticaBold);
+  //   const pngDims = pngImage.scale(1); // wielkosc ramki
+  //   const helveticaFont = await imgpdf.embedFont(StandardFonts.HelveticaBold);
 
-    const pages = imgpdf.getPages();
-    const firstPage = pages[0];
+  //   const pages = imgpdf.getPages();
+  //   const firstPage = pages[0];
 
-    firstPage.drawImage(pngImage, {
-      x: 0,
-      y: 0,
-      width: pngDims.width,
-      height: pngDims.height,
-    });
+  //   firstPage.drawImage(pngImage, {
+  //     x: 0,
+  //     y: 0,
+  //     width: pngDims.width,
+  //     height: pngDims.height,
+  //   });
 
-    // data
-    firstPage.drawText(date.toLocaleDateString(), {
-      x: 200,
-      y: 100,
-      size: 10,
-      font: helveticaFont,
-      color: rgb(0.95, 0.1, 0.1),
-    });
+  //   // data
+  //   firstPage.drawText(date.toLocaleDateString(), {
+  //     x: 200,
+  //     y: 100,
+  //     size: 10,
+  //     font: helveticaFont,
+  //     color: rgb(0.95, 0.1, 0.1),
+  //   });
 
-    //numerek
-    firstPage.drawText(number, {
-      x: 200,
-      y: 125,
-      size: 12,
-      font: helveticaFont,
-      color: rgb(0.95, 0.1, 0.1),
-    });
+  //   //numerek
+  //   firstPage.drawText(number, {
+  //     x: 200,
+  //     y: 125,
+  //     size: 12,
+  //     font: helveticaFont,
+  //     color: rgb(0.95, 0.1, 0.1),
+  //   });
 
-    firstPage.setRotation(degrees(deegrees))
+  //   firstPage.setRotation(degrees(deegrees))
 
 
-    let ramkaBytes = await imgpdf.save();
-    setRamkaBytes(ramkaBytes);
-    return imgpdf;
-  };
+  //   let ramkaBytes = await imgpdf.save();
+  //   setRamkaBytes(ramkaBytes);
+  //   return imgpdf;
+  // };
 
   const prepareRamkaTarcza4 = async () => {
     const pngImageBytes = await fetch(ramkaTarczaZMiastem).then((res) => res.arrayBuffer());
@@ -128,7 +130,7 @@ function InsertIntoPDFView() {
     // organ prowadzacy oanstwowy zasob
     firstPage.drawText(`${organProwadzacy ? 'STAROSTA RADOMSKI' : 'PREZYDENT MIASTA RADOMIA'}`, {
       x: organProwadzacy ? 310 : 270,
-      y: 290,
+      y: 283,
       size: 16,
       font: helveticaFont,
       color: rgb(0.2, 0.2, 0.2),
@@ -137,7 +139,7 @@ function InsertIntoPDFView() {
     // indetyfikator zgłoszenia prac geodezyjnych
     firstPage.drawText(numberTarcza, {
       x: 305,
-      y: 250,
+      y: 240,
       size: 16,
       font: helveticaFont,
       color: rgb(0.2, 0.2, 0.2),
@@ -146,14 +148,14 @@ function InsertIntoPDFView() {
     // numer i data sporzadzenia dokumentu potwierdzajacego...
     firstPage.drawText(number, {
       x: 305,
-      y: 140,
+      y: 130,
       size: 16,
       font: helveticaFont,
       color: rgb(0.2, 0.2, 0.2),
     });
     firstPage.drawText(`z dn. ${dateSporządzenia.toLocaleDateString()}`, {
       x: 330,
-      y: 120,
+      y: 110,
       size: 16,
       font: helveticaFont,
       color: rgb(0.2, 0.2, 0.2),
@@ -162,7 +164,7 @@ function InsertIntoPDFView() {
 
     // data przy podpisie
     firstPage.drawText(`Radom, dnia ${dateSporządzenia.toLocaleDateString()}r.`, {
-      x: 385,
+      x: 5,
       y: 10,
       size: 12,
       font: helveticaFont,
@@ -180,7 +182,8 @@ function InsertIntoPDFView() {
   };
 
   async function modifyPdf() {
-    let imgpdf = isTarczaView ? await prepareRamkaTarcza4() : await prepareRamka();
+    // let imgpdf = isTarczaView ? await prepareRamkaTarcza4() : await prepareRamka();
+    let imgpdf = await prepareRamkaTarcza4();
 
     const pdfDocContent = await PDFDocument.load(fileContent);
 
@@ -219,30 +222,31 @@ function InsertIntoPDFView() {
     setShowFile(true);
   }
 
-  const handleDateChange = (value) => {
-    let newDate = new Date(value);
-    setDate(newDate);
-  };
+  // const handleDateChange = (value) => {
+  //   let newDate = new Date(value);
+  //   setDate(newDate);
+  // };
 
   const handleDateSporządzeniaChange = (value) => {
     let newDate = new Date(value);
     setDateSporządzenia(newDate);
   };
 
-  const handleViewChange = () => {
-    isTarczaView ? prepareRamka() : prepareRamkaTarcza4();
-    setTarczView(!isTarczaView);
+  // const handleViewChange = () => {
+  //   prepareRamka();
+  //   // isTarczaView ? prepareRamka() : prepareRamkaTarcza4();
+  //   setTarczView(!isTarczaView);
 
-  }
+  // }
 
   const handleOrganChange= (value) => {
     if(value) {
       setOrganProwadzacy(true);
-      setNumber('P.1425.2020');
-      setNumberTarcza('GKN-I.');
+      setNumber('GKN-I.6042.1.');
+      setNumberTarcza('GKN-I.6042.1.');
     } else {
       setOrganProwadzacy(false);
-      setNumber('P.1463.2020');
+      setNumber('Gd.III.6642.2.');
       setNumberTarcza('Gd.III.6642.2.');
     }
   }
@@ -297,9 +301,9 @@ function InsertIntoPDFView() {
           <div>
               <button onClick={() => deegrees < 360 ? setDeegrees(deegrees + 90) : setDeegrees(90)}>Rotacja</button>
             </div>
-            <div>
+            {/* <div>
               <button onClick={() => handleViewChange()}>Zmień ramkę</button>
-            </div>
+            </div> */}
             
             <input type="radio" 
             id="miasto" 
@@ -332,7 +336,7 @@ function InsertIntoPDFView() {
               />
             </div>
 
-            <div>
+            {/* <div>
               <label>data: </label>
               <input
                 type="date"
@@ -341,7 +345,7 @@ function InsertIntoPDFView() {
                   handleDateChange(event.target.value.toString());
                 }}
               />
-            </div>
+            </div> */}
             {isTarczaView &&
             <div>
               <label>data sporządzenia: </label>
