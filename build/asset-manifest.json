@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/pdfHelper/static/css/main.ece232ea.chunk.css",
-    "main.js": "/pdfHelper/static/js/main.96b9e9ff.chunk.js",
-    "main.js.map": "/pdfHelper/static/js/main.96b9e9ff.chunk.js.map",
+    "main.js": "/pdfHelper/static/js/main.91327117.chunk.js",
+    "main.js.map": "/pdfHelper/static/js/main.91327117.chunk.js.map",
     "runtime-main.js": "/pdfHelper/static/js/runtime-main.b2cdfa90.js",
     "runtime-main.js.map": "/pdfHelper/static/js/runtime-main.b2cdfa90.js.map",
     "static/js/2.f733305d.chunk.js": "/pdfHelper/static/js/2.f733305d.chunk.js",
     "static/js/2.f733305d.chunk.js.map": "/pdfHelper/static/js/2.f733305d.chunk.js.map",
     "index.html": "/pdfHelper/index.html",
-    "precache-manifest.93750c6094cec5daecec58401b25da2b.js": "/pdfHelper/precache-manifest.93750c6094cec5daecec58401b25da2b.js",
+    "precache-manifest.826611f340650cd1672c426faaf4aa3c.js": "/pdfHelper/precache-manifest.826611f340650cd1672c426faaf4aa3c.js",
     "service-worker.js": "/pdfHelper/service-worker.js",
     "static/css/main.ece232ea.chunk.css.map": "/pdfHelper/static/css/main.ece232ea.chunk.css.map",
     "static/js/2.f733305d.chunk.js.LICENSE.txt": "/pdfHelper/static/js/2.f733305d.chunk.js.LICENSE.txt",
     "static/media/ramka.png": "/pdfHelper/static/media/ramka.3144896e.png",
-    "static/media/tarcza4.png": "/pdfHelper/static/media/tarcza4.19855605.png",
-    "static/media/tarczaMiastoWies2.png": "/pdfHelper/static/media/tarczaMiastoWies2.6dd3ecfc.png"
+    "static/media/ramkaV5.png": "/pdfHelper/static/media/ramkaV5.c0b8c67d.png",
+    "static/media/tarcza4.png": "/pdfHelper/static/media/tarcza4.19855605.png"
   },
   "entrypoints": [
     "static/js/runtime-main.b2cdfa90.js",
     "static/js/2.f733305d.chunk.js",
     "static/css/main.ece232ea.chunk.css",
-    "static/js/main.96b9e9ff.chunk.js"
+    "static/js/main.91327117.chunk.js"
   ]
 }

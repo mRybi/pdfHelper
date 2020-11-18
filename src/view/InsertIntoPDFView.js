@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import ramka from "../ramka.png";
 import ramkaTarcza from "../tarcza4.png";
-import ramkaTarczaZMiastem from "../s.png";
+import ramkaTarczaZMiastem from "../ramkaV5.png";
 
 
 import * as moment from "moment";
@@ -18,8 +18,8 @@ function InsertIntoPDFView() {
   const [date, setDate] = useState(new Date());
   const [dateSporządzenia, setDateSporządzenia] = useState(new Date());
 
-  const [number, setNumber] = useState("P.1463.2020."); // P.1425.2020.
-  const [numberTarcza, setNumberTarcza] = useState("Gd.III.6642.2."); // GKN-I.
+  const [numberTarcza, setNumberTarcza] = useState("Gd.III.6642.2.1"); // GKN-I.
+  const [number, setNumber] = useState("Gd.III.6642.2.2"); // P.1425.2020.
 
   const [scale, setScale] = useState(0.5);
   const [showFile, setShowFile] = useState(false);
@@ -125,56 +125,50 @@ function InsertIntoPDFView() {
       height: pngDims.height,
     });
 
-    // data sporządzenia
+    // organ prowadzacy oanstwowy zasob
     firstPage.drawText(`${organProwadzacy ? 'STAROSTA RADOMSKI' : 'PREZYDENT MIASTA RADOMIA'}`, {
-      x: organProwadzacy ? 360 : 320,
-      y: 320,
-      size: 17,
+      x: organProwadzacy ? 310 : 270,
+      y: 290,
+      size: 16,
       font: helveticaFont,
-      color: rgb(0, 0, 0),
+      color: rgb(0.2, 0.2, 0.2),
     });
 
-    // data
-    firstPage.drawText(date.toLocaleDateString(), {
-      x: 410,
-      y: 190,
-      size: 17,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
-    });
-
-    // data sporządzenia
+    // indetyfikator zgłoszenia prac geodezyjnych
     firstPage.drawText(numberTarcza, {
-      x: 370,
-      y: 80,
-      size: 17,
+      x: 305,
+      y: 250,
+      size: 16,
       font: helveticaFont,
-      color: rgb(0, 0, 0),
+      color: rgb(0.2, 0.2, 0.2),
+    });
+
+    // numer i data sporzadzenia dokumentu potwierdzajacego...
+    firstPage.drawText(number, {
+      x: 305,
+      y: 140,
+      size: 16,
+      font: helveticaFont,
+      color: rgb(0.2, 0.2, 0.2),
     });
     firstPage.drawText(`z dn. ${dateSporządzenia.toLocaleDateString()}`, {
-      x: 390,
-      y: 60,
-      size: 17,
+      x: 330,
+      y: 120,
+      size: 16,
       font: helveticaFont,
-      color: rgb(0, 0, 0),
+      color: rgb(0.2, 0.2, 0.2),
     });
 
-    firstPage.drawText(numberTarcza, {
-      x: 370,
-      y: 260,
-      size: 17,
+
+    // data przy podpisie
+    firstPage.drawText(`Radom, dnia ${dateSporządzenia.toLocaleDateString()}r.`, {
+      x: 385,
+      y: 10,
+      size: 12,
       font: helveticaFont,
-      color: rgb(0, 0, 0),
+      color: rgb(0.2, 0.2, 0.2),
     });
 
-    //numerek
-    firstPage.drawText(number, {
-      x: 370,
-      y: 240,
-      size: 17,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
-    });
 
 
     firstPage.setRotation(degrees(deegrees))
