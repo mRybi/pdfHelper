@@ -242,8 +242,8 @@ function InsertIntoPDFView() {
   const handleOrganChange= (value) => {
     if(value) {
       setOrganProwadzacy(true);
-      setNumber('GKN-I.6042.1.');
-      setNumberTarcza('GKN-I.6042.1.');
+      setNumber('GKN-I.6642.1.');
+      setNumberTarcza('GKN-I.6642.1.');
     } else {
       setOrganProwadzacy(false);
       setNumber('Gd.III.6642.2.');
